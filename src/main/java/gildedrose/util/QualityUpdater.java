@@ -1,6 +1,6 @@
 package gildedrose.util;
 
-import gildedrose.Item;
+import gildedrose.goods.Item;
 
 public class QualityUpdater {
 
