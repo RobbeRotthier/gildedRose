@@ -3,9 +3,9 @@ package gildedrose.goods.backstagepass;
 import gildedrose.config.Config;
 import gildedrose.goods.OurItem;
 
-public class BackStagePass extends OurItem {
+public class BackstagePass extends OurItem {
 
-	public BackStagePass(String name, int sellIn, int quality) {
+	public BackstagePass(String name, int sellIn, int quality) {
 		super(name, sellIn, quality);
 	}
 
