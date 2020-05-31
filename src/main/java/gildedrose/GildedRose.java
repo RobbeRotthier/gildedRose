@@ -1,11 +1,14 @@
 package gildedrose;
 
+import gildedrose.factory.OurItemFactory;
 import gildedrose.goods.*;
-import gildedrose.util.QualityUpdater;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class GildedRose {
 
-	private final QualityUpdater qualityUpdater = new QualityUpdater();
+	private final OurItemFactory ourItemFactory = new OurItemFactory();
 	Item[] items;
 
 	public GildedRose(Item[] items) {
@@ -13,69 +16,29 @@ public class GildedRose {
 	}
 
 	public void updateQuality() {
-		for (Item item : items) {
-			updateQualityBeforeSellInDays(item);
-			endOfDaySellIn(item);
-			updateQualityAfterSellInDays(item);
+		newWay();
+	}
+
+	private void newWay() {
+		var ourItems = convertToOurItems(items);
+		for (DayPasses item : ourItems) {
+			item.updateQuality();
+			item.atEndOfDay();
+			item.whenSellDatePassed();
 		}
+		items = convertBackToItems(ourItems);
 	}
 
-	private void updateQualityAfterSellInDays(Item item) {
-		if (item.sellIn < 0) {
-			if (!isOfType(item, AgedBrie.getName())) {
-				if (!isOfType(item, BackStagePass.getName())) {
-					if (!isOfType(item, SulfurasHand.getName())) {
-						decreaseQuality(item);
-					}
-				} else {
-					item.quality = 0;
-				}
-			} else {
-				increaseQuality(item);
-			}
-		}
+	private List<OurItem> convertToOurItems(Item[] items) {
+		return Arrays.stream(items)
+					 .map(ourItemFactory::createFrom)
+					 .collect(Collectors.toList());
 	}
 
-	private void endOfDaySellIn(Item item) {
-		if (!isOfType(item, SulfurasHand.getName())) {
-			decreaseSellIn(item);
-		}
-	}
-
-	private void updateQualityBeforeSellInDays(Item item) {
-		if (!isOfType(item, AgedBrie.getName()) && !isOfType(item, BackStagePass.getName())) {
-			if (!isOfType(item, SulfurasHand.getName())) {
-				decreaseQuality(item);
-			}
-		} else {
-			increaseQuality(item);
-
-			if (isOfType(item, BackStagePass.getName())) {
-				if (item.sellIn < BackStagePass.getBACKSTAGE_PASS_FIRST_QUALITY_INCREASER()) {
-					increaseQuality(item);
-				}
-
-				if (item.sellIn < BackStagePass.getBACKSTAGE_PASS_SECOND_QUALITY_INCREASER()) {
-					increaseQuality(item);
-				}
-			}
-		}
-	}
-
-	private void increaseQuality(Item item) {
-		qualityUpdater.increaseQuality(item);
-	}
-
-	private void decreaseQuality(Item item) {
-		qualityUpdater.decreaseQuality(item);
-	}
-
-	private boolean isOfType(Item item, String backstage_pass) {
-		return item.name.equals(backstage_pass);
-	}
-
-	private void decreaseSellIn(Item item) {
-		item.sellIn--;
+	private Item[] convertBackToItems(List<OurItem> ourItems) {
+		return ourItems.stream()
+					   .map(ourItemFactory::revert)
+					   .toArray(Item[]::new);
 	}
 }
 

@@ -20,18 +20,18 @@ public class QualityUpdater {
 	}
 
 	private boolean qualityLessThanMaxQuality(Item item) {
-		return item.quality < getMAX_QUALITY();
+		return item.quality < getMaxQuality();
 	}
 
 	private boolean qualityGreaterThanMinQuality(Item item) {
-		return item.quality > getMIN_QUALITY();
+		return item.quality > getMinQuality();
 	}
 
-	public int getMIN_QUALITY() {
+	public int getMinQuality() {
 		return MIN_QUALITY;
 	}
 
-	public int getMAX_QUALITY() {
+	public int getMaxQuality() {
 		return MAX_QUALITY;
 	}
 }

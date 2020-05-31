@@ -43,10 +43,10 @@ class QualityUpdaterTest {
 	}
 
 	private int getMaxQuality() {
-		return qualityUpdater.getMAX_QUALITY();
+		return qualityUpdater.getMaxQuality();
 	}
 
 	private int getMinQuality() {
-		return qualityUpdater.getMIN_QUALITY();
+		return qualityUpdater.getMinQuality();
 	}
 }

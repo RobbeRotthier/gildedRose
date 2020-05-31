@@ -1,7 +1,7 @@
 package gildedrose;
 
 import gildedrose.goods.Item;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -110,6 +110,21 @@ class GildedRoseTest {
 		app.updateQuality();
 		assertEquals(50, app.items[0].quality);
 		assertEquals(0, app.items[0].sellIn);
+
+		app.updateQuality();
+		assertEquals(50, app.items[0].quality);
+		assertEquals(-1, app.items[0].sellIn);
+	}
+
+	@Test
+	void agedBrieHasMaxQualityOf50EvenAfterSellInDatePassed() {
+		Item[] items = new Item[]{new Item(AGED_BRIE, 1, 49)};
+		GildedRose app = new GildedRose(items);
+
+		app.updateQuality();
+		assertEquals(50, app.items[0].quality);
+		assertEquals(0, app.items[0].sellIn);
+
 		app.updateQuality();
 		assertEquals(50, app.items[0].quality);
 		assertEquals(-1, app.items[0].sellIn);
@@ -190,7 +205,6 @@ class GildedRoseTest {
 	}
 
 	@Test
-	@Disabled("conjured flow not implemented")
 	void conjuredItemsDegradeTwiceAsFastAsNormalItems() {
 		Item[] items = new Item[]{new Item(CONJURED_MANA_CAKE, 21, 30)};
 		GildedRose app = new GildedRose(items);

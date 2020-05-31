@@ -2,13 +2,19 @@ package gildedrose.goods;
 
 public class AgedBrie extends OurItem {
 
-	private static final String NAME = "Aged Brie";
+	public static final String NAME = "Aged Brie";
 
 	public AgedBrie(int sellIn, int quality) {
-		super(getName(), sellIn, quality);
+		super(NAME, sellIn, quality);
 	}
 
-	public static String getName() {
-		return NAME;
+	@Override
+	public void updateQuality() {
+		increaseQuality();
+	}
+
+	@Override
+	public void whenSellDatePassed() {
+
 	}
 }
