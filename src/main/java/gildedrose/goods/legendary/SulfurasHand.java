@@ -1,6 +1,6 @@
 package gildedrose.goods.legendary;
 
-public class SulfurasHand extends LegendaryItem {
+public class SulfurasHand extends Legendary {
 
 	public static final String NAME = "Sulfuras, Hand of Ragnaros";
 

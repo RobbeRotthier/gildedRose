@@ -38,7 +38,7 @@ class OurItemFactoryTest {
 		var item = new Item(SulfurasHand.NAME, 1, 2);
 		var ourItem = ourItemFactory.createFrom(item);
 		assertEquals(ourItem.getClass(), SulfurasHand.class);
-		assertEquals(LegendaryItem.getLegendaryItemQuality(), ourItem.getQuality());
+		assertEquals(Legendary.getLegendaryItemQuality(), ourItem.getQuality());
 		assertEquals(item.name, ourItem.getName());
 		assertEquals(item.sellIn, ourItem.getSellIn());
 	}

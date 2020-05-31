@@ -3,9 +3,9 @@ package gildedrose.goods.legendary;
 import gildedrose.config.Config;
 import gildedrose.goods.OurItem;
 
-public class LegendaryItem extends OurItem {
+public class Legendary extends OurItem {
 
-	public LegendaryItem(String name, int sellIn) {
+	public Legendary(String name, int sellIn) {
 		super(name, sellIn, getLegendaryItemQuality());
 	}
 
