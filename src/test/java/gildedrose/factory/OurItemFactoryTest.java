@@ -1,6 +1,10 @@
 package gildedrose.factory;
 
 import gildedrose.goods.*;
+import gildedrose.goods.backstagepass.Tafkal80EtcConcertBackstagePass;
+import gildedrose.goods.cheese.AgedBrie;
+import gildedrose.goods.conjured.ConjuredManaCake;
+import gildedrose.goods.legendary.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,19 +18,19 @@ class OurItemFactoryTest {
 		var item = new Item("name", 1, 2);
 		var ourItem = ourItemFactory.createFrom(item);
 		assertEquals(ourItem.getClass(), OurItem.class);
-		assertEquals(item.quality, ourItem.quality);
-		assertEquals(item.name, ourItem.name);
-		assertEquals(item.sellIn, ourItem.sellIn);
+		assertEquals(item.quality, ourItem.getQuality());
+		assertEquals(item.name, ourItem.getName());
+		assertEquals(item.sellIn, ourItem.getSellIn());
 	}
 
 	@Test
 	void createFromConjuredItem() {
-		var item = new Item(ConjuredItem.NAME, 1, 2);
+		var item = new Item(ConjuredManaCake.NAME, 1, 2);
 		var ourItem = ourItemFactory.createFrom(item);
-		assertEquals(ourItem.getClass(), ConjuredItem.class);
-		assertEquals(item.quality, ourItem.quality);
-		assertEquals(item.name, ourItem.name);
-		assertEquals(item.sellIn, ourItem.sellIn);
+		assertEquals(ourItem.getClass(), ConjuredManaCake.class);
+		assertEquals(item.quality, ourItem.getQuality());
+		assertEquals(item.name, ourItem.getName());
+		assertEquals(item.sellIn, ourItem.getSellIn());
 	}
 
 	@Test
@@ -34,9 +38,9 @@ class OurItemFactoryTest {
 		var item = new Item(SulfurasHand.NAME, 1, 2);
 		var ourItem = ourItemFactory.createFrom(item);
 		assertEquals(ourItem.getClass(), SulfurasHand.class);
-		assertEquals(SulfurasHand.getSulfurasQuality(), ourItem.quality);
-		assertEquals(item.name, ourItem.name);
-		assertEquals(item.sellIn, ourItem.sellIn);
+		assertEquals(LegendaryItem.getLegendaryItemQuality(), ourItem.getQuality());
+		assertEquals(item.name, ourItem.getName());
+		assertEquals(item.sellIn, ourItem.getSellIn());
 	}
 
 	@Test
@@ -44,63 +48,63 @@ class OurItemFactoryTest {
 		var item = new Item(AgedBrie.NAME, 1, 2);
 		var ourItem = ourItemFactory.createFrom(item);
 		assertEquals(ourItem.getClass(), AgedBrie.class);
-		assertEquals(item.quality, ourItem.quality);
-		assertEquals(item.name, ourItem.name);
-		assertEquals(item.sellIn, ourItem.sellIn);
+		assertEquals(item.quality, ourItem.getQuality());
+		assertEquals(item.name, ourItem.getName());
+		assertEquals(item.sellIn, ourItem.getSellIn());
 	}
 
 	@Test
 	void createFromAgedBackStagePassItem() {
-		var item = new Item(BackStagePass.NAME, 1, 2);
+		var item = new Item(Tafkal80EtcConcertBackstagePass.NAME, 1, 2);
 		var ourItem = ourItemFactory.createFrom(item);
-		assertEquals(ourItem.getClass(), BackStagePass.class);
-		assertEquals(item.quality, ourItem.quality);
-		assertEquals(item.name, ourItem.name);
-		assertEquals(item.sellIn, ourItem.sellIn);
+		assertEquals(ourItem.getClass(), Tafkal80EtcConcertBackstagePass.class);
+		assertEquals(item.quality, ourItem.getQuality());
+		assertEquals(item.name, ourItem.getName());
+		assertEquals(item.sellIn, ourItem.getSellIn());
 	}
 
 	@Test
 	void revertRegularItem() {
 		var ourItem = new OurItem("name", 1, 2);
 		var item = ourItemFactory.revert(ourItem);
-		assertEquals(ourItem.quality, item.quality);
-		assertEquals(ourItem.name, item.name);
-		assertEquals(ourItem.sellIn, item.sellIn);
+		assertEquals(ourItem.getQuality(), item.quality);
+		assertEquals(ourItem.getName(), item.name);
+		assertEquals(ourItem.getSellIn(), item.sellIn);
 	}
 
 	@Test
 	void revertAgedBrieItem() {
 		var ourItem = new AgedBrie(1, 2);
 		var item = ourItemFactory.revert(ourItem);
-		assertEquals(ourItem.quality, item.quality);
-		assertEquals(ourItem.name, item.name);
-		assertEquals(ourItem.sellIn, item.sellIn);
+		assertEquals(ourItem.getQuality(), item.quality);
+		assertEquals(ourItem.getName(), item.name);
+		assertEquals(ourItem.getSellIn(), item.sellIn);
 	}
 
 	@Test
 	void revertSulfurasHandItem() {
 		var ourItem = new SulfurasHand(2);
 		var item = ourItemFactory.revert(ourItem);
-		assertEquals(ourItem.quality, item.quality);
-		assertEquals(ourItem.name, item.name);
-		assertEquals(ourItem.sellIn, item.sellIn);
+		assertEquals(ourItem.getQuality(), item.quality);
+		assertEquals(ourItem.getName(), item.name);
+		assertEquals(ourItem.getSellIn(), item.sellIn);
 	}
 
 	@Test
 	void revertBackStagePassItem() {
-		var ourItem = new BackStagePass(1, 2);
+		var ourItem = new Tafkal80EtcConcertBackstagePass(1, 2);
 		var item = ourItemFactory.revert(ourItem);
-		assertEquals(ourItem.quality, item.quality);
-		assertEquals(ourItem.name, item.name);
-		assertEquals(ourItem.sellIn, item.sellIn);
+		assertEquals(ourItem.getQuality(), item.quality);
+		assertEquals(ourItem.getName(), item.name);
+		assertEquals(ourItem.getSellIn(), item.sellIn);
 	}
 
 	@Test
 	void revertConjuredItem() {
-		var ourItem = new ConjuredItem(1, 2);
+		var ourItem = new ConjuredManaCake(1, 2);
 		var item = ourItemFactory.revert(ourItem);
-		assertEquals(ourItem.quality, item.quality);
-		assertEquals(ourItem.name, item.name);
-		assertEquals(ourItem.sellIn, item.sellIn);
+		assertEquals(ourItem.getQuality(), item.quality);
+		assertEquals(ourItem.getName(), item.name);
+		assertEquals(ourItem.getSellIn(), item.sellIn);
 	}
 }

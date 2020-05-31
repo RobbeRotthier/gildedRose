@@ -2,7 +2,7 @@ package gildedrose.goods;
 
 import gildedrose.util.QualityUpdater;
 
-public class OurItem extends Item implements DayPasses {
+public class OurItem extends Item implements ItemInterface {
 
 	private final QualityUpdater qualityUpdater = new QualityUpdater();
 
@@ -27,16 +27,31 @@ public class OurItem extends Item implements DayPasses {
 		}
 	}
 
-	void increaseQuality() {
+	@Override
+	public String getName() {
+		return super.name;
+	}
+
+	@Override
+	public int getSellIn() {
+		return super.sellIn;
+	}
+
+	@Override
+	public int getQuality() {
+		return super.quality;
+	}
+
+	public void increaseQuality() {
 		qualityUpdater.increaseQuality(this);
 	}
 
-	void decreaseQuality() {
+	public void decreaseQuality() {
 		qualityUpdater.decreaseQuality(this);
 	}
 
-	boolean sellingDatePassed() {
-		return super.sellIn < 0;
+	public boolean sellingDatePassed() {
+		return getSellIn() < 0;
 	}
 }
 

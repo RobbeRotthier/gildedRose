@@ -1,10 +1,11 @@
-package gildedrose.goods;
+package gildedrose.goods.conjured;
+
+import gildedrose.goods.OurItem;
 
 public class ConjuredItem extends OurItem {
-	public static final String NAME = "Conjured Mana Cake";
 
-	public ConjuredItem(int sellIn, int quality) {
-		super(NAME, sellIn, quality);
+	public ConjuredItem(String name, int sellIn, int quality) {
+		super(name, sellIn, quality);
 	}
 
 	@Override

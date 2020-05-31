@@ -21,7 +21,7 @@ public class GildedRose {
 
 	private void newWay() {
 		var ourItems = convertToOurItems(items);
-		for (DayPasses item : ourItems) {
+		for (ItemInterface item : ourItems) {
 			item.updateQuality();
 			item.atEndOfDay();
 			item.whenSellDatePassed();
@@ -29,13 +29,13 @@ public class GildedRose {
 		items = convertBackToItems(ourItems);
 	}
 
-	private List<OurItem> convertToOurItems(Item[] items) {
+	private List<ItemInterface> convertToOurItems(Item[] items) {
 		return Arrays.stream(items)
 					 .map(ourItemFactory::createFrom)
 					 .collect(Collectors.toList());
 	}
 
-	private Item[] convertBackToItems(List<OurItem> ourItems) {
+	private Item[] convertBackToItems(List<ItemInterface> ourItems) {
 		return ourItems.stream()
 					   .map(ourItemFactory::revert)
 					   .toArray(Item[]::new);

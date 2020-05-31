@@ -1,11 +1,9 @@
 package gildedrose.util;
 
+import gildedrose.config.Config;
 import gildedrose.goods.Item;
 
 public class QualityUpdater {
-
-	private final int MIN_QUALITY = 0;
-	private final int MAX_QUALITY = 50;
 
 	public void increaseQuality(Item item) {
 		if (qualityLessThanMaxQuality(item)) {
@@ -28,10 +26,10 @@ public class QualityUpdater {
 	}
 
 	public int getMinQuality() {
-		return MIN_QUALITY;
+		return Config.MIN_QUALITY;
 	}
 
 	public int getMaxQuality() {
-		return MAX_QUALITY;
+		return Config.MAX_QUALITY;
 	}
 }
