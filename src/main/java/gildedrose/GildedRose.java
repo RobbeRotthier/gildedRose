@@ -47,7 +47,7 @@ public class GildedRose {
 				item.sellIn = item.sellIn - 1;
 			}
 
-			if (item.sellIn < MIN_QUALITY) {
+			if (item.sellIn < 0) {
 				if (!item.name.equals(AGED_BRIE)) {
 					if (!item.name.equals(BACKSTAGE_PASS)) {
 						if (item.quality > MIN_QUALITY) {
