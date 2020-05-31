@@ -18,25 +18,25 @@ public class GildedRose {
 		for (Item item : items) {
 			if (!item.name.equals(AGED_BRIE)
 					&& !item.name.equals(BACKSTAGE_PASS)) {
-				if (item.quality > MIN_QUALITY) {
+				if (qualityGreaterThanMinQuality(item)) {
 					if (!item.name.equals(SULFURAS_HAND)) {
-						item.quality = item.quality - 1;
+						decreaseQuality(item);
 					}
 				}
 			} else {
-				if (item.quality < MAX_QUALITY) {
-					item.quality = item.quality + 1;
+				if (qualityLessThanMaxQuality(item)) {
+					increaseQuality(item);
 
 					if (item.name.equals(BACKSTAGE_PASS)) {
 						if (item.sellIn < BACKSTAGE_PASS_FIRST_QUALITY_INCREASER) {
-							if (item.quality < MAX_QUALITY) {
-								item.quality = item.quality + 1;
+							if (qualityLessThanMaxQuality(item)) {
+								increaseQuality(item);
 							}
 						}
 
 						if (item.sellIn < BACKSTAGE_PASS_SECOND_QUALITY_INCREASER) {
-							if (item.quality < MAX_QUALITY) {
-								item.quality = item.quality + 1;
+							if (qualityLessThanMaxQuality(item)) {
+								increaseQuality(item);
 							}
 						}
 					}
@@ -44,27 +44,47 @@ public class GildedRose {
 			}
 
 			if (!item.name.equals(SULFURAS_HAND)) {
-				item.sellIn = item.sellIn - 1;
+				decreaseSellIn(item);
 			}
 
 			if (item.sellIn < 0) {
 				if (!item.name.equals(AGED_BRIE)) {
 					if (!item.name.equals(BACKSTAGE_PASS)) {
-						if (item.quality > MIN_QUALITY) {
+						if (qualityGreaterThanMinQuality(item)) {
 							if (!item.name.equals(SULFURAS_HAND)) {
-								item.quality = item.quality - 1;
+								decreaseQuality(item);
 							}
 						}
 					} else {
-						item.quality = item.quality - item.quality;
+						item.quality = 0;
 					}
 				} else {
-					if (item.quality < MAX_QUALITY) {
-						item.quality = item.quality + 1;
+					if (qualityLessThanMaxQuality(item)) {
+						increaseQuality(item);
 					}
 				}
 			}
 		}
+	}
+
+	private boolean qualityLessThanMaxQuality(Item item) {
+		return item.quality < MAX_QUALITY;
+	}
+
+	private void decreaseSellIn(Item item) {
+		item.sellIn--;
+	}
+
+	private boolean qualityGreaterThanMinQuality(Item item) {
+		return item.quality > MIN_QUALITY;
+	}
+
+	private void increaseQuality(Item item) {
+		item.quality++;
+	}
+
+	private void decreaseQuality(Item item) {
+		item.quality--;
 	}
 }
 
