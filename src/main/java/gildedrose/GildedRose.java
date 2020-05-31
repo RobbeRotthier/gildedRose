@@ -16,54 +16,69 @@ public class GildedRose {
 
 	public void updateQuality() {
 		for (Item item : items) {
-			if (!item.name.equals(AGED_BRIE)
-					&& !item.name.equals(BACKSTAGE_PASS)) {
-				if (qualityGreaterThanMinQuality(item)) {
-					if (!item.name.equals(SULFURAS_HAND)) {
-						decreaseQuality(item);
+			updateQualityBeforeSellinDays(item);
+
+			endOfDaySellIn(item);
+
+			updateQualityAfterSellInDays(item);
+		}
+	}
+
+	private void updateQualityAfterSellInDays(Item item) {
+		if (item.sellIn < 0) {
+			if (!isOfType(item, AGED_BRIE)) {
+				if (!isOfType(item, BACKSTAGE_PASS)) {
+					if (qualityGreaterThanMinQuality(item)) {
+						if (!isOfType(item, SULFURAS_HAND)) {
+							decreaseQuality(item);
+						}
 					}
+				} else {
+					item.quality = 0;
 				}
 			} else {
 				if (qualityLessThanMaxQuality(item)) {
 					increaseQuality(item);
+				}
+			}
+		}
+	}
 
-					if (item.name.equals(BACKSTAGE_PASS)) {
-						if (item.sellIn < BACKSTAGE_PASS_FIRST_QUALITY_INCREASER) {
-							if (qualityLessThanMaxQuality(item)) {
-								increaseQuality(item);
-							}
+	private void updateQualityBeforeSellinDays(Item item) {
+		if (!isOfType(item, AGED_BRIE) && !isOfType(item, BACKSTAGE_PASS)) {
+			if (qualityGreaterThanMinQuality(item)) {
+				if (!isOfType(item, SULFURAS_HAND)) {
+					decreaseQuality(item);
+				}
+			}
+		} else {
+			if (qualityLessThanMaxQuality(item)) {
+				increaseQuality(item);
+
+				if (isOfType(item, BACKSTAGE_PASS)) {
+					if (item.sellIn < BACKSTAGE_PASS_FIRST_QUALITY_INCREASER) {
+						if (qualityLessThanMaxQuality(item)) {
+							increaseQuality(item);
 						}
+					}
 
-						if (item.sellIn < BACKSTAGE_PASS_SECOND_QUALITY_INCREASER) {
-							if (qualityLessThanMaxQuality(item)) {
-								increaseQuality(item);
-							}
+					if (item.sellIn < BACKSTAGE_PASS_SECOND_QUALITY_INCREASER) {
+						if (qualityLessThanMaxQuality(item)) {
+							increaseQuality(item);
 						}
 					}
 				}
 			}
+		}
+	}
 
-			if (!item.name.equals(SULFURAS_HAND)) {
-				decreaseSellIn(item);
-			}
+	private boolean isOfType(Item item, String backstage_pass) {
+		return item.name.equals(backstage_pass);
+	}
 
-			if (item.sellIn < 0) {
-				if (!item.name.equals(AGED_BRIE)) {
-					if (!item.name.equals(BACKSTAGE_PASS)) {
-						if (qualityGreaterThanMinQuality(item)) {
-							if (!item.name.equals(SULFURAS_HAND)) {
-								decreaseQuality(item);
-							}
-						}
-					} else {
-						item.quality = 0;
-					}
-				} else {
-					if (qualityLessThanMaxQuality(item)) {
-						increaseQuality(item);
-					}
-				}
-			}
+	private void endOfDaySellIn(Item item) {
+		if (!isOfType(item, SULFURAS_HAND)) {
+			decreaseSellIn(item);
 		}
 	}
 
