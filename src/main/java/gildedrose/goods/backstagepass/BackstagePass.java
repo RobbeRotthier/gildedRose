@@ -1,23 +1,20 @@
 package gildedrose.goods.backstagepass;
 
 import gildedrose.config.Config;
-import gildedrose.goods.OurItem;
+import gildedrose.goods.*;
 
-public class BackstagePass extends OurItem {
+public abstract class BackstagePass extends ItemWrapper {
 
 	public BackstagePass(String name, int sellIn, int quality) {
 		super(name, sellIn, quality);
 	}
 
-	public static int getBackStagePassFirstQualityIncreaser() {
-		return Config.BACKSTAGE_PASS_FIRST_QUALITY_INCREASER;
+	public BackstagePass(Item item) {
+		super(item);
 	}
 
-	@Override
-	public void whenSellDatePassed() {
-		if (sellingDatePassed()) {
-			super.quality = 0;
-		}
+	public static int getBackStagePassFirstQualityIncreaser() {
+		return Config.BACKSTAGE_PASS_FIRST_QUALITY_INCREASER;
 	}
 
 	public static int getBackStagePassSecondQualityIncreaser() {
@@ -25,18 +22,22 @@ public class BackstagePass extends OurItem {
 	}
 
 	@Override
+	public void whenSellDatePassed() {
+		if (sellingDatePassed()) {
+			super.setQuality(Config.MIN_QUALITY);
+		}
+	}
+
+	@Override
 	public void updateQuality() {
-		if (super.sellIn < getBackStagePassSecondQualityIncreaser()) {
-			increaseQuality();
-			increaseQuality();
-			increaseQuality();
+		if (super.getSellIn() < getBackStagePassSecondQualityIncreaser()) {
+			increaseQuality(3);
 			return;
 		}
-		if (super.sellIn < getBackStagePassFirstQualityIncreaser()) {
-			increaseQuality();
-			increaseQuality();
+		if (super.getSellIn() < getBackStagePassFirstQualityIncreaser()) {
+			increaseQuality(2);
 			return;
 		}
-		increaseQuality();
+		increaseQuality(1);
 	}
 }

@@ -1,16 +1,20 @@
 package gildedrose.goods.cheese;
 
-import gildedrose.goods.OurItem;
+import gildedrose.goods.*;
 
-public class Cheese extends OurItem {
+public abstract class Cheese extends ItemWrapper {
 
 	public Cheese(String name, int sellIn, int quality) {
 		super(name, sellIn, quality);
 	}
 
+	public Cheese(Item item) {
+		super(item);
+	}
+
 	@Override
 	public void updateQuality() {
-		increaseQuality();
+		increaseQuality(1);
 	}
 
 	@Override

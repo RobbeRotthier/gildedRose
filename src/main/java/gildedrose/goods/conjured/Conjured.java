@@ -1,17 +1,20 @@
 package gildedrose.goods.conjured;
 
-import gildedrose.goods.OurItem;
+import gildedrose.goods.*;
 
-public class Conjured extends OurItem {
+public abstract class Conjured extends ItemWrapper {
 
 	public Conjured(String name, int sellIn, int quality) {
 		super(name, sellIn, quality);
 	}
 
+	public Conjured(Item item) {
+		super(item);
+	}
+
 	@Override
 	public void updateQuality() {
-		decreaseQuality();
-		decreaseQuality();
+		decreaseQuality(2);
 	}
 
 	@Override
