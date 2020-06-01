@@ -5,10 +5,6 @@ import gildedrose.goods.*;
 
 public abstract class Legendary extends ItemWrapper {
 
-	public Legendary(String name, int sellIn) {
-		super(name, sellIn, getLegendaryItemQuality());
-	}
-
 	public Legendary(Item item) {
 		super(item);
 	}
@@ -18,7 +14,7 @@ public abstract class Legendary extends ItemWrapper {
 	}
 
 	@Override
-	public void atEndOfDay() {
+	public void updateSellIn() {
 	}
 
 	@Override

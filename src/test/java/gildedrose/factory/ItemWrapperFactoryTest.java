@@ -15,7 +15,7 @@ class ItemWrapperFactoryTest {
 	private final ItemWrapperFactory itemWrapperFactory = new ItemWrapperFactory();
 
 	@Test
-	void createFromRegularItem() {
+	void createFromItem() {
 		var item = new Item("name", 1, 2);
 		var ourItem = itemWrapperFactory.createFrom(item);
 		assertEquals(ourItem.getClass(), RegularItem.class);
@@ -75,7 +75,7 @@ class ItemWrapperFactoryTest {
 
 	@Test
 	void revertAgedBrieItem() {
-		var ourItem = new AgedBrie(1, 2);
+		AgedBrie ourItem = new AgedBrie(1, 2);
 		var item = itemWrapperFactory.revert(ourItem);
 		assertEquals(ourItem.getQuality(), item.quality);
 		assertEquals(ourItem.getName(), item.name);
@@ -84,7 +84,7 @@ class ItemWrapperFactoryTest {
 
 	@Test
 	void revertSulfurasHandItem() {
-		var ourItem = new SulfurasHand(2);
+		SulfurasHand ourItem = new SulfurasHand(2);
 		var item = itemWrapperFactory.revert(ourItem);
 		assertEquals(ourItem.getQuality(), item.quality);
 		assertEquals(ourItem.getName(), item.name);
@@ -93,7 +93,7 @@ class ItemWrapperFactoryTest {
 
 	@Test
 	void revertBackStagePassItem() {
-		var ourItem = new Tafkal80EtcConcertBackstagePass(1, 2);
+		Tafkal80EtcConcertBackstagePass ourItem = new Tafkal80EtcConcertBackstagePass(1, 2);
 		var item = itemWrapperFactory.revert(ourItem);
 		assertEquals(ourItem.getQuality(), item.quality);
 		assertEquals(ourItem.getName(), item.name);
@@ -102,10 +102,14 @@ class ItemWrapperFactoryTest {
 
 	@Test
 	void revertConjuredItem() {
-		var ourItem = new ConjuredManaCake(1, 2);
+		ConjuredManaCake ourItem = createConjuredManaCake();
 		var item = itemWrapperFactory.revert(ourItem);
 		assertEquals(ourItem.getQuality(), item.quality);
 		assertEquals(ourItem.getName(), item.name);
 		assertEquals(ourItem.getSellIn(), item.sellIn);
+	}
+
+	private ConjuredManaCake createConjuredManaCake() {
+		return new ConjuredManaCake(1, 2);
 	}
 }

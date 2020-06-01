@@ -20,11 +20,11 @@ public class GildedRose {
 	}
 
 	private void newWay() {
-		var ourItems = convertToOurItems(items);
-		for (ItemInterface item : ourItems) {
+		var itemWrappers = convertToOurItems(items);
+		for (ItemInterface item : itemWrappers) {
 			item.atEndOfDay();
 		}
-		items = convertBackToItems(ourItems);
+		items = convertBackToItems(itemWrappers);
 	}
 
 	private List<ItemInterface> convertToOurItems(Item[] items) {

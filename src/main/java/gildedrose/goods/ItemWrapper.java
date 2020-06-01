@@ -8,10 +8,6 @@ public abstract class ItemWrapper implements ItemInterface {
 
 	private final QualityUpdater qualityUpdater = new QualityUpdater();
 
-	public ItemWrapper(String name, int sellIn, int quality) {
-		item = new Item(name, sellIn, quality);
-	}
-
 	public ItemWrapper(Item item) {
 		this.item = item;
 	}
@@ -52,7 +48,6 @@ public abstract class ItemWrapper implements ItemInterface {
 		return item.sellIn;
 	}
 
-	@Override
 	public int getQuality() {
 		return item.quality;
 	}

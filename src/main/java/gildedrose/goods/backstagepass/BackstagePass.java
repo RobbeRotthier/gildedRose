@@ -5,10 +5,6 @@ import gildedrose.goods.*;
 
 public abstract class BackstagePass extends ItemWrapper {
 
-	public BackstagePass(String name, int sellIn, int quality) {
-		super(name, sellIn, quality);
-	}
-
 	public BackstagePass(Item item) {
 		super(item);
 	}

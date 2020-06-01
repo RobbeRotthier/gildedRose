@@ -5,12 +5,12 @@ import gildedrose.goods.ItemWrapper;
 
 public class QualityUpdater {
 
-	public void increase(ItemWrapper item, int amount) {
-		item.setQuality(Math.min(item.getQuality() + amount, getMaxQuality()));
+	public void increase(ItemWrapper itemWrapper, int amount) {
+		itemWrapper.setQuality(Math.min(itemWrapper.getQuality() + amount, getMaxQuality()));
 	}
 
-	public void decrease(ItemWrapper item, int amount) {
-		item.setQuality(Math.max(item.getQuality() - amount, getMinQuality()));
+	public void decrease(ItemWrapper itemWrapper, int amount) {
+		itemWrapper.setQuality(Math.max(itemWrapper.getQuality() - amount, getMinQuality()));
 	}
 
 	public int getMinQuality() {
