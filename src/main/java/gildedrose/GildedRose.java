@@ -1,7 +1,7 @@
 package gildedrose;
 
-import gildedrose.factory.ItemWrapperFactory;
-import gildedrose.goods.*;
+import gildedrose.domain.*;
+import gildedrose.domain.factory.ItemWrapperFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,10 +16,6 @@ public class GildedRose {
 	}
 
 	public void updateQuality() {
-		newWay();
-	}
-
-	private void newWay() {
 		var itemWrappers = convertToOurItems(items);
 		for (ItemInterface item : itemWrappers) {
 			item.atEndOfDay();

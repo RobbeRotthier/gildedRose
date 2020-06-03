@@ -1,9 +1,8 @@
-package gildedrose.goods.legendary;
+package gildedrose.domain;
 
 import gildedrose.config.Config;
-import gildedrose.goods.*;
 
-public abstract class Legendary extends ItemWrapper {
+public class Legendary extends ItemWrapper {
 
 	public Legendary(Item item) {
 		super(item);

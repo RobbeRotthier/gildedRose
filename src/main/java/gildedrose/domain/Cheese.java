@@ -1,8 +1,6 @@
-package gildedrose.goods.cheese;
+package gildedrose.domain;
 
-import gildedrose.goods.*;
-
-public abstract class Cheese extends ItemWrapper {
+public class Cheese extends ItemWrapper {
 
 	public Cheese(Item item) {
 		super(item);

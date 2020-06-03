@@ -1,12 +1,10 @@
-package gildedrose.goods;
+package gildedrose.domain;
 
-import gildedrose.util.QualityUpdater;
+import gildedrose.domain.util.QualityUpdater;
 
 public abstract class ItemWrapper implements ItemInterface {
 
 	private final Item item;
-
-	private final QualityUpdater qualityUpdater = new QualityUpdater();
 
 	public ItemWrapper(Item item) {
 		this.item = item;
@@ -61,11 +59,11 @@ public abstract class ItemWrapper implements ItemInterface {
 	}
 
 	public void increaseQuality(int amount) {
-		qualityUpdater.increase(this, amount);
+		QualityUpdater.increase(this, amount);
 	}
 
 	public void decreaseQuality(int amount) {
-		qualityUpdater.decrease(this, amount);
+		QualityUpdater.decrease(this, amount);
 	}
 
 	public boolean sellingDatePassed() {

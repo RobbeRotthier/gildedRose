@@ -1,8 +1,6 @@
-package gildedrose.goods.regular;
+package gildedrose.domain;
 
-import gildedrose.goods.Item;
-
-public class RegularItem extends Regular {
+public class RegularItem extends ItemWrapper {
 
 	public RegularItem(String name, int sellIn, int quality) {
 		this(new Item(name, sellIn, quality));

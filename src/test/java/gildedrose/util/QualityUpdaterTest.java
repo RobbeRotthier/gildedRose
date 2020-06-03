@@ -1,7 +1,7 @@
 package gildedrose.util;
 
-import gildedrose.goods.Item;
-import gildedrose.goods.regular.RegularItem;
+import gildedrose.domain.*;
+import gildedrose.domain.util.QualityUpdater;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,13 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class QualityUpdaterTest {
 
 	private final String regular_item = "REGULAR_ITEM";
-	private final QualityUpdater qualityUpdater = new QualityUpdater();
 
 	@Test
 	void increaseQuality() {
 		var item = new RegularItem(new Item(regular_item, 0, getMaxQuality() - 20));
 
-		qualityUpdater.increase(item, 1);
+		QualityUpdater.increase(item, 1);
 		assertEquals(getMaxQuality() - 19, item.getQuality());
 	}
 
@@ -23,7 +22,7 @@ class QualityUpdaterTest {
 	void increaseQualityWith5() {
 		var item = new RegularItem(new Item(regular_item, 0, getMaxQuality() - 20));
 
-		qualityUpdater.increase(item, 5);
+		QualityUpdater.increase(item, 5);
 		assertEquals(getMaxQuality() - 15, item.getQuality());
 	}
 
@@ -31,7 +30,7 @@ class QualityUpdaterTest {
 	void increaseQualityAboveMaxQuality() {
 		var item = new RegularItem(new Item(regular_item, 0, getMaxQuality()));
 
-		qualityUpdater.increase(item, 1);
+		QualityUpdater.increase(item, 1);
 		assertEquals(getMaxQuality(), item.getQuality());
 	}
 
@@ -39,7 +38,7 @@ class QualityUpdaterTest {
 	void increaseQualityWith5GoingAboveQuality() {
 		var item = new RegularItem(new Item(regular_item, 0, getMaxQuality() - 1));
 
-		qualityUpdater.increase(item, 5);
+		QualityUpdater.increase(item, 5);
 		assertEquals(getMaxQuality(), item.getQuality());
 	}
 
@@ -47,7 +46,7 @@ class QualityUpdaterTest {
 	void decreaseQuality() {
 		var item = new RegularItem(new Item(regular_item, 0, getMaxQuality() - 20));
 
-		qualityUpdater.decrease(item, 1);
+		QualityUpdater.decrease(item, 1);
 		assertEquals(getMaxQuality() - 21, item.getQuality());
 	}
 
@@ -55,7 +54,7 @@ class QualityUpdaterTest {
 	void decreaseQualityWith5() {
 		var item = new RegularItem(new Item(regular_item, 0, getMaxQuality() - 20));
 
-		qualityUpdater.decrease(item, 5);
+		QualityUpdater.decrease(item, 5);
 		assertEquals(getMaxQuality() - 25, item.getQuality());
 	}
 
@@ -63,7 +62,7 @@ class QualityUpdaterTest {
 	void decreaseQualityWith5GoingBelowMinQuality() {
 		var item = new RegularItem(new Item(regular_item, 0, getMaxQuality() - 49));
 
-		qualityUpdater.decrease(item, 5);
+		QualityUpdater.decrease(item, 5);
 		assertEquals(getMinQuality(), item.getQuality());
 	}
 
@@ -71,15 +70,15 @@ class QualityUpdaterTest {
 	void decreaseQualityBelowMinQuality() {
 		var item = new RegularItem(new Item(regular_item, 0, getMinQuality()));
 
-		qualityUpdater.decrease(item, 1);
+		QualityUpdater.decrease(item, 1);
 		assertEquals(getMinQuality(), item.getQuality());
 	}
 
 	private int getMaxQuality() {
-		return qualityUpdater.getMaxQuality();
+		return QualityUpdater.getMaxQuality();
 	}
 
 	private int getMinQuality() {
-		return qualityUpdater.getMinQuality();
+		return QualityUpdater.getMinQuality();
 	}
 }

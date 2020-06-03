@@ -1,23 +1,25 @@
-package gildedrose.util;
+package gildedrose.domain.util;
 
 import gildedrose.config.Config;
-import gildedrose.goods.ItemWrapper;
+import gildedrose.domain.ItemWrapper;
 
 public class QualityUpdater {
+	private QualityUpdater() {
+	}
 
-	public void increase(ItemWrapper itemWrapper, int amount) {
+	public static void increase(ItemWrapper itemWrapper, int amount) {
 		itemWrapper.setQuality(Math.min(itemWrapper.getQuality() + amount, getMaxQuality()));
 	}
 
-	public void decrease(ItemWrapper itemWrapper, int amount) {
+	public static void decrease(ItemWrapper itemWrapper, int amount) {
 		itemWrapper.setQuality(Math.max(itemWrapper.getQuality() - amount, getMinQuality()));
 	}
 
-	public int getMinQuality() {
+	public static int getMinQuality() {
 		return Config.MIN_QUALITY;
 	}
 
-	public int getMaxQuality() {
+	public static int getMaxQuality() {
 		return Config.MAX_QUALITY;
 	}
 }

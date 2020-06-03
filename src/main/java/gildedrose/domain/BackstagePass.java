@@ -1,9 +1,8 @@
-package gildedrose.goods.backstagepass;
+package gildedrose.domain;
 
 import gildedrose.config.Config;
-import gildedrose.goods.*;
 
-public abstract class BackstagePass extends ItemWrapper {
+public class BackstagePass extends ItemWrapper {
 
 	public BackstagePass(Item item) {
 		super(item);

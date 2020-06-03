@@ -1,8 +1,6 @@
-package gildedrose.goods.conjured;
+package gildedrose.domain;
 
-import gildedrose.goods.*;
-
-public abstract class Conjured extends ItemWrapper {
+public class Conjured extends ItemWrapper {
 
 	public Conjured(Item item) {
 		super(item);

@@ -1,4 +1,4 @@
-package gildedrose.goods;
+package gildedrose.domain;
 
 public class Item {
 
